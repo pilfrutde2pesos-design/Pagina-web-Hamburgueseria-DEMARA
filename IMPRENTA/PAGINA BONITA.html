@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburguesería Demara</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#121212', 
+                        cardBg: '#1a1a1a',
+                        cardHover: '#242424',
+                        lettuce: '#22c55e',
+                        lettuceHover: '#16a34a',
+                        lettuceLight: '#4ade80'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+ <!--Termina CSS-->
+</head>
+<body class="bg-darkBg text-gray-100 selection:bg-lettuce selection:text-black">
+
+    <!-- Navigation & Header -->
+    <header class="sticky top-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-lettuce flex items-center justify-center text-black font-bold text-xl shadow-lg shadow-lettuce/20">
+                    <i class="fa-solid fa-burger"></i>
+                </div>
+                <title class="text-xl sm:text-2xl font-black tracking-wider text-white uppercase block">Demara</title>
+            </div>
+            
+            <!-- Cart trigger & mobile menu button -->
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleCartModal()" class="relative bg-cardBg hover:bg-cardHover border border-gray-700 px-4 py-2 rounded-full flex items-center space-x-2 transition-all group transform hover:-translate-y-1">
+                    <i class="fa-solid fa-cart-shopping text-lettuce "></i>
+                    <span class="text-sm font-semibold hidden sm:inline ">Pedido</span>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-lettuce text-black text-xs w-5 h-5 rounded-full font-bold flex items-center justify-center scale-0 transition-transform duration-300">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Índice con Globos (Floating Bubble Nav) -->
+        <div class="bg-cardBg/80 border-t border-gray-800 py-2 px-4 overflow-x-auto">
+            <div class="max-w-7xl mx-auto flex space-x-3 sm:space-x-4 min-w-max justify-start sm:justify-center">
+                <a href="#inicio" class="bg-gray-800 hover:bg-lettuce hover:text-black text-white text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full transition-all flex items-center space-x-2 border border-gray-700 hover:border-lettuce shadow-md group">
+                    <i class="fa-solid fa-house text-lettuce group-hover:text-black"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="#combos" class="bg-gray-800 hover:bg-lettuce hover:text-black text-white text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full transition-all flex items-center space-x-2 border border-gray-700 hover:border-lettuce shadow-md group">
+                    <i class="fa-solid fa-fire text-lettuce group-hover:text-black"></i>
+                    <span>Combos Limitados</span>
+                </a>
+                <a href="#menu" class="bg-gray-800 hover:bg-lettuce hover:text-black text-white text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full transition-all flex items-center space-x-2 border border-gray-700 hover:border-lettuce shadow-md group">
+                    <i class="fa-solid fa-utensils text-lettuce group-hover:text-black"></i>
+                    <span>Menú Clásico</span>
+                </a>
+                <a href="#bebidas" class="bg-gray-800 hover:bg-lettuce hover:text-black text-white text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full transition-all flex items-center space-x-2 border border-gray-700 hover:border-lettuce shadow-md group">
+                    <i class="fa-solid fa-wine-glass text-lettuce group-hover:text-black"></i>
+                    <span>Bebidas</span>
+                </a>
+                <a href="#sugerencias" class="bg-gray-800 hover:bg-lettuce hover:text-black text-white text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full transition-all flex items-center space-x-2 border border-gray-700 hover:border-lettuce shadow-md group">
+                    <i class="fa-solid fa-comments text-lettuce group-hover:text-black"></i>
+                    <span>Sugerencias</span>
+                </a>
+                <a href="#contacto" class="bg-gray-800 hover:bg-lettuce hover:text-black text-white text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full transition-all flex items-center space-x-2 border border-gray-700 hover:border-lettuce shadow-md group">
+                    <i class="fa-solid fa-location-dot text-lettuce group-hover:text-black"></i>
+                    <span>Contacto</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seccion 1: Inicio / Historia -->
+    <section id="inicio" class="relative min-h-[85vh] flex items-center justify-center bg-cover bg-center py-20 px-4" style="background-image: linear-gradient(to bottom, rgba(18,18,18,0.85), rgba(18,18,18,0.95)), url('zzzfondo.jpg');">
+        <div class="max-w-4xl mx-auto text-center z-10">
+            <span class="inline-block bg-lettuce/10 text-lettuce font-bold text-sm sm:text-base px-4 py-1.5 rounded-full mb-6 border border-lettuce/30 tracking-wider uppercase">
+                Emprendimiento 100% Artesanal de Casa
+            </span>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-black text-white mb-6 leading-tight tracking-tight">
+                Hamburguesería <span class="text-lettuce underline decoration-lettuce/50 underline-offset-8">Demara</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
+                Nacimos en la cocina de casa con una parrilla pequeña y un sueño gigante: reinventar la hamburguesa clásica con ingredientes frescos, carnes seleccionadas y un toque casero inigualable. Cada mordisco cuenta nuestra historia de pasión y dedicación familiar.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#menu" class="w-full sm:w-auto bg-lettuce hover:bg-lettuceHover text-black font-extxl font-bold px-8 py-4 rounded-full shadow-lg shadow-lettuce/20 transition-all transform hover:-translate-y-1 text-center">
+                    Ver Menú y Pedir
+                </a>
+                <a href="#combos" class="w-full sm:w-auto bg-cardBg hover:bg-cardHover text-white border border-gray-700 font-bold px-8 py-4 rounded-full transition-all transform hover:-translate-y-1 text-center">
+                    Ver Combos del Mes
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seccion 2: Combos Limitados -->
+    <section id="combos" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl sm:text-5xl font-black text-white mb-4">Combos <span class="text-lettuce">Limitados</span></h2>
+            <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">Ediciones especiales de temporada preparadas con recetas exclusivas. ¡Pídelos antes de que se agoten!</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Combo 1 -->
+            <div class="bg-cardBg rounded-3xl overflow-hidden border border-gray-800 shadow-xl flex flex-col justify-between group hover:border-lettuce/50 transition-all">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="hamburguesaXL.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/1a1a1a/22c55e?text=Combo+Demara+XL'">
+                    <span class="absolute top-4 left-4 bg-lettuce text-black font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Edición Limitada</span>
+                </div>
+                <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-2xl font-bold text-white">Combo Demara XL</h3>
+                            <span class="text-xl font-black text-lettuce">12.50 Bs</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6">Doble carne artesanal de 180g, queso cheddar fundido, tocino crujiente ahumado, cebolla caramelizada, papas rústicas de la casa y bebida de 500ml a elección.</p>
+                    </div>
+                    <button onclick="addToCart('Combo Demara XL', 12.50, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80')" class="w-full bg-lettuce/10 hover:bg-lettuce hover:text-black text-lettuce border border-lettuce/30 font-bold py-3 rounded-xl transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Agregar al Pedido</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Combo 2 -->
+            <div class="bg-cardBg rounded-3xl overflow-hidden border border-gray-800 shadow-xl flex flex-col justify-between group hover:border-lettuce/50 transition-all">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="hamburguesaconcebolla.jpg" alt="Combo Crispy Onion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/1a1a1a/22c55e?text=Combo+Crispy+Onion'">
+                    <span class="absolute top-4 left-4 bg-lettuce text-black font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exclusivo</span>
+                </div>
+                <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-2xl font-bold text-white">Combo cebolleta</h3>
+                            <span class="text-xl font-black text-lettuce">11.00 Bs</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6">Medallón de res, aros de cebolla empanizados crujientes, salsa barbacoa artesanal de la abuela, aros de tomate fresco, papas fritas y bebida a elección.</p>
+                    </div>
+                    <button onclick="addToCart('Combo Crispy Onion', 11.00, 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=800&q=80')" class="w-full bg-lettuce/10 hover:bg-lettuce hover:text-black text-lettuce border border-lettuce/30 font-bold py-3 rounded-xl transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Agregar al Pedido</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seccion 3: Menú Principal -->
+    <section id="menu" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-cardBg/30 rounded-3xl my-10 border border-gray-800/80">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl sm:text-5xl font-black text-white mb-4">Menú <span class="text-lettuce">Clásico</span></h2>
+            <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">Nuestras estrellas de siempre. Ingredientes frescos, pan brioche artesanal horneado a diario y carne jugosa al punto exacto.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            <!-- Hamburguesa 1 -->
+            <div class="bg-cardBg rounded-3xl overflow-hidden border border-gray-800 shadow-lg flex flex-col justify-between group">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="hamburguesaDEMARA.jpg" alt="Clásica Demara" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/1a1a1a/22c55e?text=Clasica+Demara'">
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-xl font-bold text-white">Clásica Demara</h3>
+                            <span class="text-lg font-black text-lettuce">17.50 Bs</span>
+                        </div>
+                        <p class="text-gray-400 text-xs sm:text-sm mb-4"><strong class="text-gray-300">Ingredientes:</strong> Carne 150g, queso cheddar, lechuga crujiente, tomate fresco, cebolla morada y salsa de la casa en pan brioche.</p>
+                    </div>
+                    <button onclick="addToCart('Clásica Demara', 17.50, 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=600&q=80')" class="w-full bg-lettuce text-black font-bold py-2.5 rounded-xl hover:bg-lettuceHover transition-all flex items-center justify-center space-x-2 text-sm">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Agregar</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hamburguesa 2 -->
+            <div class="bg-cardBg rounded-3xl overflow-hidden border border-gray-800 shadow-lg flex flex-col justify-between group">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="chesse.jpg" alt="Quesamante" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/1a1a1a/22c55e?text=Quesamante'">
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-xl font-bold text-white">Quesamante</h3>
+                            <span class="text-lg font-black text-lettuce">19.00 Bs</span>
+                        </div>
+                        <p class="text-gray-400 text-xs sm:text-sm mb-4"><strong class="text-gray-300">Ingredientes:</strong> Carne 150g, abundante tocino ahumado en tiras, doble queso cheddar fundido y salsa BBQ artesanal.</p>
+                    </div>
+                    <button onclick="addToCart('Quesamante', 19.00, 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=600&q=80')" class="w-full bg-lettuce text-black font-bold py-2.5 rounded-xl hover:bg-lettuceHover transition-all flex items-center justify-center space-x-2 text-sm">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Agregar</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hamburguesa 3 -->
+            <div class="bg-cardBg rounded-3xl overflow-hidden border border-gray-800 shadow-lg flex flex-col justify-between group">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="posho.jpg" alt="Chicken Pollo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/1a1a1a/22c55e?text=Chicken+Pollo'">
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-xl font-bold text-white">chicken pollo</h3>
+                            <span class="text-lg font-black text-lettuce">18.00 Bs</span>
+                        </div>
+                        <p class="text-gray-400 text-xs sm:text-sm mb-4"><strong class="text-gray-300">Ingredientes:</strong> Pechuga de pollo empanizada y crujiente, ensalada de repollo, pepinillos y mayonesa de ajo.</p>
+                    </div>
+                    <button onclick="addToCart('chicken pollo', 18.00, 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80')" class="w-full bg-lettuce text-black font-bold py-2.5 rounded-xl hover:bg-lettuceHover transition-all flex items-center justify-center space-x-2 text-sm">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Agregar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subsección: Bebidas -->
+        <div id="bebidas" class="pt-10 border-t border-gray-800">
+            <div class="text-center mb-12">
+                <h3 class="text-2xl sm:text-3xl font-bold text-white mb-2">Bebidas y Acompañamientos</h3>
+                <p class="text-gray-400 text-sm">Para acompañar tu hamburguesa favorita</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-cardBg p-5 rounded-2xl border border-gray-800 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-white">Gaseosa 500ml</h4>
+                        <span class="text-lettuce font-black text-sm">6.00 Bs</span>
+                    </div>
+                    <button onclick="addToCart('Gaseosa 500ml', 6.00, 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=300&q=80')" class="bg-gray-800 hover:bg-lettuce hover:text-black text-white w-10 h-10 rounded-xl flex items-center justify-center transition-all">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+
+                <div class="bg-cardBg p-5 rounded-2xl border border-gray-800 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-white">Jarra de Chicha</h4>
+                        <span class="text-lettuce font-black text-sm">8.00 Bs</span>
+                    </div>
+                    <button onclick="addToCart('Jarra de Chicha', 8.00, 'https://images.unsplash.com/photo-1608270104343-2439281507ef?auto=format&fit=crop&w=300&q=80')" class="bg-gray-800 hover:bg-lettuce hover:text-black text-white w-10 h-10 rounded-xl flex items-center justify-center transition-all">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+
+                <div class="bg-cardBg p-5 rounded-2xl border border-gray-800 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-white">Papas Fritas Rústicas</h4>
+                        <span class="text-lettuce font-black text-sm">7.00 Bs</span>
+                    </div>
+                    <button onclick="addToCart('Papas Fritas Rústicas', 7.00, 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=300&q=80')" class="bg-gray-800 hover:bg-lettuce hover:text-black text-white w-10 h-10 rounded-xl flex items-center justify-center transition-all">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+
+                <div class="bg-cardBg p-5 rounded-2xl border border-gray-800 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-white">Limonada Casera</h4>
+                        <span class="text-lettuce font-black text-sm">7.00 Bs</span>
+                    </div>
+                    <button onclick="addToCart('Limonada Casera', 7.00, 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=300&q=80')" class="bg-gray-800 hover:bg-lettuce hover:text-black text-white w-10 h-10 rounded-xl flex items-center justify-center transition-all">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seccion 5: Sugerencias y Opiniones (Actualizado con redirección a Gmail) -->
+    <section id="sugerencias" class="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 sm:p-12 shadow-2xl">
+            <div class="text-center mb-10">
+                <span class="text-lettuce font-bold text-xs sm:text-sm uppercase tracking-widest bg-lettuce/10 px-3 py-1 rounded-full border border-lettuce/20">Tu opinión nos importa</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-white mt-3">Sugerencias y Nuevos Menús</h2>
+                <p class="text-gray-400 text-sm mt-2">¿Tienes una idea para una nueva hamburguesa o quieres dejarnos tu opinión? Escríbenos aquí abajo.</p>
+            </div>
+
+            <!-- COMENTARIO: Formulario conectado a la función handleSuggestion que abre Gmail con mailto -->
+            <form id="suggestion-form" onsubmit="handleSuggestion(event)" class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Tu Nombre</label>
+                        <input type="text" id="sug-name" required placeholder="Ej. Carlos Mendoza" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-lettuce transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Correo electronico</label>
+                        <input type="text" id="sug-contact" required placeholder="Ej. FulanitoDemara@gmail.com" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-lettuce transition-all">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-2">Tipo de Mensaje</label>
+                    <select id="sug-type" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-lettuce transition-all">
+                        <option value="Idea de Nueva Hamburguesa">Idea de Nueva Hamburguesa</option>
+                        <option value="Opinión / Reseña">Opinión / Reseña del Servicio</option>
+                        <option value="Sugerencia general">Sugerencia general</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-2">Tu Mensaje o Receta Sugerida</label>
+                    <textarea id="sug-msg" rows="4" required placeholder="Cuéntanos qué ingredientes te gustaría ver en Demara..." class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-lettuce transition-all resize-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-lettuce hover:bg-lettuceHover text-black font-extrabold py-4 rounded-xl transition-all shadow-lg shadow-lettuce/20 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Enviar Sugerencia por Correo</span>
+                </button>
+            </form>
+            <div id="sug-success" class="hidden mt-6 bg-lettuce/10 border border-lettuce text-lettuce p-4 rounded-xl text-center font-bold">
+                ¡Redirigiendo a tu correo para enviar la sugerencia a Demara...
+            </div>
+        </div>
+    </section>
+
+    <!-- Seccion 6: Información de Contacto -->
+    <section id="contacto" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-gray-800">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div class="bg-cardBg p-8 rounded-3xl border border-gray-800">
+                <div class="w-12 h-12 rounded-full bg-lettuce/10 text-lettuce flex items-center justify-center text-xl mx-auto md:mx-0 mb-4 border border-lettuce/20">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Localidad</h3>
+                <p class="text-gray-400 text-sm">Av. Nueva Eridu #478, Zona Sur<br>Santa Cruz de la Sierra, Bolivia</p>
+            </div>
+
+            <div class="bg-cardBg p-8 rounded-3xl border border-gray-800">
+                <div class="w-12 h-12 rounded-full bg-lettuce/10 text-lettuce flex items-center justify-center text-xl mx-auto md:mx-0 mb-4 border border-lettuce/20">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Pedidos y Reservas</h3>
+                <p class="text-gray-400 text-sm">Teléfono / WhatsApp:<br>+591 73616003</p>
+            </div>
+
+            <div class="bg-cardBg p-8 rounded-3xl border border-gray-800">
+                <div class="w-12 h-12 rounded-full bg-lettuce/10 text-lettuce flex items-center justify-center text-xl mx-auto md:mx-0 mb-4 border border-lettuce/20">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Horarios de Atención</h3>
+                <p class="text-gray-400 text-sm">Miércoles a Domingo:<br>18:00 PM – 22:30 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seccion 7: Pie de Página (Footer) con Instagram, Facebook, WhatsApp y TikTok -->
+    <footer class="bg-black py-12 border-t border-gray-900 text-center px-4">
+        <div class="max-w-7xl mx-auto flex flex-col items-center justify-center space-y-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-lettuce flex items-center justify-center text-black font-bold">
+                    <i class="fa-solid fa-burger text-sm"></i>
+                </div>
+                <span class="text-xl font-black text-white uppercase">Hamburguesería Demara</span>
+            </div>
+            
+            <!-- COMENTARIO: Enlaces de redes sociales de simulación (Instagram, Facebook, WhatsApp y TikTok añadido) -->
+            <div class="flex space-x-6 text-gray-400 text-xl">
+                <!-- Red social: Instagram simulado -->
+                <a href="https://instagram.com/hamburgueseriademara_simulacion" target="_blank" class="hover:text-lettuce transition-colors" title="Instagram de Demara"><i class="fa-brands fa-instagram"></i></a>
+                <!-- Red social: Facebook simulado -->
+                <a href="https://facebook.com/hamburgueseriademara.simulacion" target="_blank" class="hover:text-lettuce transition-colors" title="Facebook de Demara"><i class="fa-brands fa-facebook"></i></a>
+                <!-- Red social: TikTok simulado (Añadido) -->
+                <a href="https://tiktok.com/@hamburgueseriademara_simulacion" target="_blank" class="hover:text-lettuce transition-colors" title="TikTok de Demara"><i class="fa-brands fa-tiktok"></i></a>
+                <!-- Red social: WhatsApp de pedidos simulado -->
+                <a href="https://wa.me/59171234567?text=Hola,%20quiero%20consultar%20el%20menú%20de%20Demara" target="_blank" class="hover:text-lettuce transition-colors" title="WhatsApp de Demara"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+
+            <p class="text-gray-500 text-xs">© 2026 Hamburguesería Demara. Todos los derechos reservados. Hecho con sabor artesanal.</p>
+        </div>
+    </footer>
+
+    <!-- Seccion 4: Carrito de Compras Modal (Slide-over) -->
+    <div id="cart-modal" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="toggleCartModal()"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-cardBg border-l border-gray-800 flex flex-col shadow-2xl">
+                <!-- Header del Carrito -->
+                <div class="p-6 border-b border-gray-800 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-cart-shopping text-lettuce text-xl"></i>
+                        <h2 class="text-xl font-bold text-white">Tu Pedido Actual</h2>
+                    </div>
+                    <button onclick="toggleCartModal()" class="text-gray-400 hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Lista de Items en el Carrito -->
+                <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <div class="text-center text-gray-500 py-12">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-gray-700"></i>
+                        <p class="text-sm">Tu carrito está vacío.<br>¡Agrega deliciosas hamburguesas o combos!</p>
+                    </div>
+                </div>
+
+                <!-- Footer del Carrito (Totales y Checkout) -->
+                <div class="p-6 border-t border-gray-800 bg-darkBg">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-gray-400 text-sm">Total a pagar:</span>
+                        <span id="cart-total" class="text-2xl font-black text-lettuce">Bs 0.00</span>
+                    </div>
+                    <button onclick="checkoutOrder()" id="checkout-btn" disabled class="w-full bg-lettuce/50 text-black font-extrabold py-3.5 rounded-xl transition-all flex items-center justify-center space-x-2 cursor-not-allowed">
+                        <i class="fa-solid fa-check"></i>
+                        <span>Enviar a WhatsApp</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Funcional e Interactivo -->
+    <script>
+        // Estado del Carrito
+        let cart = [];
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function addToCart(name, price, image) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, image, quantity: 1 });
+            }
+            updateCartUI();
+            
+            const badge = document.getElementById('cart-badge');
+            badge.classList.remove('scale-0');
+            badge.classList.add('scale-110');
+            setTimeout(() => badge.classList.remove('scale-110'), 300);
+        }
+
+        function updateQuantity(name, change) {
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.name !== name);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartBadge = document.getElementById('cart-badge');
+            const cartTotal = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            let totalCount = 0;
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center text-gray-500 py-12">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-gray-700"></i>
+                        <p class="text-sm">Tu carrito está vacío.<br>¡Agrega deliciosas hamburguesas o combos!</p>
+                    </div>
+                `;
+                cartBadge.textContent = '0';
+                cartBadge.classList.add('scale-0');
+                cartTotal.textContent = 'Bs 0.00';
+                checkoutBtn.disabled = true;
+                checkoutBtn.className = "w-full bg-lettuce/50 text-black font-extrabold py-3.5 rounded-xl transition-all flex items-center justify-center space-x-2 cursor-not-allowed";
+                return;
+            }
+
+            let html = '';
+            cart.forEach(item => {
+                totalCount += item.quantity;
+                totalPrice += item.price * item.quantity;
+
+                html += `
+                    <div class="flex items-center justify-between bg-gray-900/60 p-3 rounded-2xl border border-gray-800">
+                        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-xl" onerror="this.src='https://placehold.co/100x100/1a1a1a/22c55e?text=Demara'">
+                        <div class="flex-1 ml-3">
+                            <h4 class="font-bold text-white text-sm">${item.name}</h4>
+                            <span class="text-lettuce text-xs font-semibold">Bs ${item.price.toFixed(2)}</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="updateQuantity('${item.name}', -1)" class="w-7 h-7 bg-gray-800 hover:bg-gray-700 text-white rounded-lg flex items-center justify-center text-xs">-</button>
+                            <span class="text-sm font-bold text-white w-5 text-center">${item.quantity}</span>
+                            <button onclick="updateQuantity('${item.name}', 1)" class="w-7 h-7 bg-gray-800 hover:bg-gray-700 text-white rounded-lg flex items-center justify-center text-xs">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartItemsContainer.innerHTML = html;
+            cartBadge.textContent = totalCount;
+            cartBadge.classList.remove('scale-0');
+            cartTotal.textContent = `Bs ${totalPrice.toFixed(2)}`;
+            checkoutBtn.disabled = false;
+            checkoutBtn.className = "w-full bg-lettuce hover:bg-lettuceHover text-black font-extrabold py-3.5 rounded-xl transition-all flex items-center justify-center space-x-2 shadow-lg shadow-lettuce/20 cursor-pointer";
+        }
+
+        // Función para enviar pedido a WhatsApp
+        function checkoutOrder() {
+            if (cart.length === 0) return;
+            
+            const phoneNumber = "+59173616003"; // Número de WhatsApp del negocio
+            
+            let message = "¡Hola! Quisiera realizar el siguiente pedido en Hamburguesería Demara:%0A%0A";
+            let total = 0;
+            
+            cart.forEach(item => {
+                message += `• ${item.quantity}x ${item.name} - Bs ${(item.price * item.quantity).toFixed(2)}%0A`;
+                total += item.price * item.quantity;
+            });
+            
+            message += `%0A*Total a pagar: Bs ${total.toFixed(2)}*`;
+            message += `%0A%0A¡Quedo a la espera de la confirmación de mi pedido!`;
+
+            const whatsappURL = `https://wa.me/${+59173616003}?text=${message}`;
+            window.open(whatsappURL, '_blank');
+
+            cart = [];
+            updateCartUI();
+            toggleCartModal();
+        }
+
+        // COMENTARIO: Función añadida para capturar los datos del formulario de sugerencias y abrir Gmail con mailto
+        function handleSuggestion(e) {
+            e.preventDefault();
+            
+            // Obtener los valores ingresados por el usuario en el formulario
+            const name = document.getElementById('sug-name').value;
+            const contact = document.getElementById('sug-contact').value;
+            const type = document.getElementById('sug-type').value;
+            const msg = document.getElementById('sug-msg').value;
+            const successBox = document.getElementById('sug-success');
+            
+            // Correo electrónico de destino del negocio (puedes cambiarlo por tu correo real)
+            const recipientEmail = "rayondoshi@gmail.com";
+            
+            // Construir el Asunto y el Cuerpo del correo codificados para URL
+            const subject = encodeURIComponent(`Nueva sugerencia de cliente: ${type} - ${name}`);
+            const body = encodeURIComponent(
+                `Hola, equipo de Hamburguesería Demara:\n\n` +
+                `He enviado una nueva sugerencia desde la plataforma web:\n\n` +
+                `• Nombre: ${name}\n` +
+                `• Contacto (Correo/Teléfono): ${contact}\n` +
+                `• Tipo de Mensaje: ${type}\n\n` +
+                `Mensaje / Receta Sugerida:\n${msg}\n\n` +
+                `¡Espero que sea de utilidad para el negocio!`
+            );
+
+            // Mostrar mensaje visual de éxito temporal
+            successBox.textContent = `¡Gracias, ${name}! Abriendo tu cliente de correo para enviar la sugerencia...`;
+            successBox.classList.remove('hidden');
+
+            // Abrir el cliente de correo (Gmail/Outlook predeterminado del sistema) con los datos precargados
+            setTimeout(() => {
+                window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+            }, 1000);
+
+            // Restablecer el formulario después de un momento
+            setTimeout(() => {
+                successBox.classList.add('hidden');
+                document.getElementById('suggestion-form').reset();
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
